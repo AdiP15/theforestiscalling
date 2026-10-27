@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest-bg: #07110D;
+  --color-forest-surface: #101A14;
+  --color-forest-deep: #14291C;
+  --color-forest-green: #244B32;
+  --color-forest-accent: #B6F36B;
+  --color-forest-text: #F2F4ED;
+  --color-forest-muted: #A1ADA3;
+  --color-forest-ember: #FF5A36;
+  --color-forest-border: rgba(242, 244, 237, 0.14);
+
+  --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  --bg-primary: #07110D;
+  --bg-surface: #101A14;
+  --color-accent: #B6F36B;
+  --color-ember: #FF5A36;
+  --color-text: #F2F4ED;
+  --color-muted: #A1ADA3;
+  --border-muted: rgba(242, 244, 237, 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #07110D;
+  color: #F2F4ED;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #07110D;
+  color: #F2F4ED;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #B6F36B;
+  color: #07110D;
+}
+
+/* Accessible focus outline */
+:focus-visible {
+  outline: 2px solid #B6F36B;
+  outline-offset: 3px;
+}
+
+/* Atmospheric mist and dust particle animations */
+@keyframes mist-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(-2%, 3%, 0) scale(1.04);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(2%, -2%, 0) scale(1.02);
+    opacity: 0.4;
+  }
+}
+
+@keyframes mist-drift-reverse {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.02);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translate3d(3%, -3%, 0) scale(0.98);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate3d(-2%, 2%, 0) scale(1.03);
+    opacity: 0.5;
+  }
+}
+
+@keyframes ember-float {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-80px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+.animate-mist-slow {
+  animation: mist-drift 26s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-mist-slow-reverse {
+  animation: mist-drift-reverse 34s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+/* Subtle image ken-burns restrained slow zoom */
+@keyframes kenburns-hero {
+  0% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1.0);
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns-hero 16s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: transform;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .animate-mist-slow,
+  .animate-mist-slow-reverse,
+  .animate-kenburns {
+    animation: none !important;
+    transform: none !important;
+  }
+}
